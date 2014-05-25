@@ -1,0 +1,14 @@
+<div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+
+    {% for post in posts %}
+        {{ timber_get_template_part('content', 'page', { 'post': post }) }}
+        {% if function('comments_open') or post.comments|length > 0 %}
+            {{ function('comments_template') }}
+        {% endif %}
+    {% endfor %}
+
+    </main><!-- #main -->
+</div><!-- #primary -->
+
+{{ sidebar }}
