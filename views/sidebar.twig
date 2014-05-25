@@ -1,0 +1,25 @@
+<div id="secondary" class="widget-area" role="complementary">
+    {% if widgets_sidebar_1_has_widgets %}
+        {{ widget_sidebar_1 }}
+    {% else %}
+        <aside id="search" class="widget widget_search">
+            {{ function('get_search_form') }}
+        </aside>
+
+        <aside id="archives" class="widget">
+            <h1 class="widget-title">{{ __('Archives', 'timberscores') }}</h1>
+            <ul>
+                {{ function('wp_get_archives', { 'type': 'monthly' }) }}
+            </ul>
+        </aside>
+
+        <aside id="meta" class="widget">
+            <h1 class="widget-title">{{ __('Meta', 'timberscores') }}</h1>
+            <ul>
+                {{ function('wp_register') }}
+                <li>{{ function('wp_loginout') }}</li>
+                {{ function('wp_meta') }}
+            </ul>
+        </aside>
+    {% endif %}
+</div><!-- #secondary -->
