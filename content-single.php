@@ -2,61 +2,14 @@
 /**
  * @package timberscores
  */
+
+global $timber_template_part_context;
+if (!$timber_template_part_context) { // TODO: This is ugly.. need a better way
+	$timber_template_part_context = array();
+}
+
+$context = array_merge(timberscores_get_context(), $timber_template_part_context);
+
+Timber::render('views/content-single.twig', $context);
+
 ?>
-
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-
-		<div class="entry-meta">
-			<?php timberscores_posted_on(); ?>
-		</div><!-- .entry-meta -->
-	</header><!-- .entry-header -->
-
-	<div class="entry-content">
-		<?php the_content(); ?>
-		<?php
-			wp_link_pages( array(
-				'before' => '<div class="page-links">' . __( 'Pages:', 'timberscores' ),
-				'after'  => '</div>',
-			) );
-		?>
-	</div><!-- .entry-content -->
-
-	<footer class="entry-footer">
-		<?php
-			/* translators: used between list items, there is a space after the comma */
-			$category_list = get_the_category_list( __( ', ', 'timberscores' ) );
-
-			/* translators: used between list items, there is a space after the comma */
-			$tag_list = get_the_tag_list( '', __( ', ', 'timberscores' ) );
-
-			if ( ! timberscores_categorized_blog() ) {
-				// This blog only has 1 category so we just need to worry about tags in the meta text
-				if ( '' != $tag_list ) {
-					$meta_text = __( 'This entry was tagged %2$s. Bookmark the <a href="%3$s" rel="bookmark">permalink</a>.', 'timberscores' );
-				} else {
-					$meta_text = __( 'Bookmark the <a href="%3$s" rel="bookmark">permalink</a>.', 'timberscores' );
-				}
-
-			} else {
-				// But this blog has loads of categories so we should probably display them here
-				if ( '' != $tag_list ) {
-					$meta_text = __( 'This entry was posted in %1$s and tagged %2$s. Bookmark the <a href="%3$s" rel="bookmark">permalink</a>.', 'timberscores' );
-				} else {
-					$meta_text = __( 'This entry was posted in %1$s. Bookmark the <a href="%3$s" rel="bookmark">permalink</a>.', 'timberscores' );
-				}
-
-			} // end check for categories on this blog
-
-			printf(
-				$meta_text,
-				$category_list,
-				$tag_list,
-				get_permalink()
-			);
-		?>
-
-		<?php edit_post_link( __( 'Edit', 'timberscores' ), '<span class="edit-link">', '</span>' ); ?>
-	</footer><!-- .entry-footer -->
-</article><!-- #post-## -->
