@@ -1,0 +1,43 @@
+<div id="comments" class="comments-area">
+    {% set comments = post.comments %}
+    {% set comment_pages_count = function('get_comment_pages_count', comments) %}
+
+    {% if comments %}
+        <h2 class="comments-title">
+            {{ _nx('One thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', comments|length, 'comments title', 'timberscores')|format(function('number_format_i18n', comments|length), '<span>' ~ post.title ~ '</span>') }}
+        </h2>
+
+        {# // are there comments to navigate through #}
+        {% if comment_pages_count > 1 and page_comments %}
+        <nav id="comment-nav-above" class="comment-navigation" role="navigation">
+            <h1 class="screen-reader-text">{{ __('Comment navigation', 'timberscores') }}</h1>
+            <div class="nav-previous">{{ function('previous_comments_link', __('&larr; Older Comments', 'timberscores')) }}</div>
+            <div class="nav-next">{{ function('next_comments_link', __('Newer Comments &rarr;', 'timberscores')) }}</div>
+        </nav><!-- #comment-nav-above -->
+        {% endif %}
+
+        <ol class="comment-list">
+            {{ function('wp_list_comments', {
+                'style': 'ol',
+                'short_ping': true,
+            }, comments) }}
+        </ol><!-- .comment-list -->
+
+        {# // are there comments to navigate through #}
+        {% if comment_pages_count > 1 and page_comments %}
+        <nav id="comment-nav-below" class="comment-navigation" role="navigation">
+            <h1 class="screen-reader-text">{{ __('Comment navigation', 'timberscores') }}</h1>
+            <div class="nav-previous">{{ function('previous_comments_link', __('&larr; Older Comments', 'timberscores')) }}</div>
+            <div class="nav-next">{{ function('next_comments_link', __('Newer Comments &rarr;', 'timberscores')) }}</div>
+        </nav><!-- #comment-nav-below -->
+        {% endif %}
+    {% endif %}
+
+    {# If comments are closed and there are comments, let's leave a little note, shall we? #}
+    {% if not function('comments_open') and comments|length != 0 and function('post_type_supports', post.post_type, 'comments') %}
+        <p class="no-comments">{{ __('Comments are closed.', 'timberscores') }}</p>
+    {% endif %}
+
+    {{ function('comment_form', {}, post.ID) }}
+
+</div><!-- #comments -->
