@@ -1,0 +1,65 @@
+{% import 'views/macros.twig' as macros %}
+
+<article id="post-{{ post.ID }}" class="{{ post.post_class }}">
+    <header class="entry-header">
+        <h1 class="entry-title">
+            <a href="{{ post.permalink }}" rel="bookmark">{{ post.title }}</a>
+        </h1>
+
+        {% if post.post_type == 'post' %}
+        <div class="entry-meta">
+            {{ macros.timberscores_posted_on(post) }}
+        </div><!-- .entry-meta -->
+        {% endif %}
+    </header><!-- .entry-header -->
+
+    {# TODO: should is_* functions be exposed by Timber? #}
+    {% if function('is_search') %}
+        <div class="entry-summary">
+            {{ post.get_preview }}
+        </div><!-- .entry-summary -->
+    {% else %}
+        <div class="entry-content">
+            {{ post.get_preview(50, false, __('Continue reading <span class="meta-nav">&rarr;</span>', 'timberscores')) }}
+
+            {# TODO: This only works in the loop... what's the Timber equivalent? #}
+            {{ function('wp_link_pages', {
+                'before': '<div class="page-links">' . __( 'Pages:', 'timberscores' ),
+                'after': '</div>',
+            }) }}
+        </div><!-- .entry-content -->
+    {% endif %}
+
+    <footer class="entry-footer">
+        {% if post.post_type == 'post' %}
+            {# Hide category and tag text for pages on Search #}
+            {# TODO: more potential functions to add to the twig context #}
+            {# translators: used between list items, there is a space after the comma #}
+            {% set categories_list = function('get_the_category_list', __(', ', 'timberscores'), '', post.ID) %}
+            {% if categories_list and function('timberscores_categorized_blog') %}
+                <span class="cat-links">
+                    {{ __("Posted in %1$s", 'timberscores')|format(categories_list) }}
+                </span>
+            {% endif %}
+
+            {# translators: used between list items, there is a space after the comma #}
+            {% set tags_list = function('get_the_tag_list', '', __(', ', 'timberscores'), '', post.ID) %}
+            {% if tags_list %}
+                <span class="tags-links">
+                    {{ __("Tagged %1$s", 'timberscores')|format(tags_list) }}
+                </span>
+            {% endif %}
+        {% endif %}
+
+        {% if not function('post_password_required', post) and (function('comments_open', post) or function('get_comments_number', post) != 0) %}
+            <span class="comments-link">
+                {# TODO: how can we make it possible to use comments_popup_link here? Should global $post just be set in content.php ? #}
+                {# {{ function('comments_popup_link', __('Leave a comment', 'timberscores'), __('1 Comment', 'timberscores'), __('% Comments', 'timberscores')) }} #}
+            </span>
+        {% endif %}
+
+        {# TODO: this is sort of ugly #}
+        {{ function('edit_post_link', __('Edit', 'timberscores'), '<span class="edit-link"', '</span>', post) }}
+    </footer><!-- .entry-footer -->
+
+</article><!-- #post-## -->
