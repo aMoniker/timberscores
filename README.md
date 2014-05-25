@@ -1,11 +1,11 @@
-_s
+timberscores
 ===
 
-Hi. I'm a starter theme called `_s`, or `underscores`, if you like. I'm a theme meant for hacking so don't use me as a Parent Theme. Instead try turning me into the next, most awesome, WordPress theme out there. That's what I'm here for.
+Hi. I'm a starter theme called ~~`underscores`~~ `timberscores`. I'm a conversion of the underscores theme that's built for use with [Timber](https://github.com/jarednova/timber). I'm meant for hacking so don't use me as a Parent Theme. Instead try turning me into the next, most awesome, WordPress theme out there. That's what I'm here for.
 
 My ultra-minimal CSS might make me look like theme tartare but that means less stuff to get in your way when you're designing your awesome theme. Here are some of the other more interesting things you'll find here:
 
-* A just right amount of lean, well-commented, modern, HTML5 templates.
+* A just right amount of lean, well-commented, modern, HTML5 *twig* templates.
 * A helpful 404 template.
 * A sample custom header implementation in `inc/custom-header.php` that can be activated by uncommenting one line in functions.php and adding the code snippet found in the comments of `inc/custom-header.php` to your `header.php` template.
 * Custom template tags in `inc/template-tags.php` that keep your templates clean and neat and prevent code duplication.
@@ -18,25 +18,17 @@ My ultra-minimal CSS might make me look like theme tartare but that means less s
 Getting Started
 ---------------
 
-If you want to keep it simple, head over to http://underscores.me and generate your `_s` based theme from there. You just input the name of the theme you want to create, click the "Generate" button, and you get your ready-to-awesomize starter theme.
+There's no generator currently like there is at [http://underscores.me](http://underscores.me), but you could customize the name of the theme fairly easily with a global find/replace of the word `timberscores`.
 
-If you want to set things up manually, download `_s` from github. The first thing you want to do is copy the `_s` directory and change the name to something else - Like, say, `megatherium` - then you'll need to do a five-step find and replace on the name in all the templates.
+Or, you can snoop around manually.
 
-1. Search for `'_s'` (inside single quotations) to capture the text domain.
-2. Search for `_s_` to capture all the function names.
-3. Search for `Text Domain: _s` in style.css.
-4. Search for <code>&nbsp;_s</code> (with a space before it) to capture DocBlocks.
-5. Search for `_s-` to capture prefixed handles.
+1. Search for `'timberscores'` (inside single quotations) to capture the text domain.
+2. Search for `timberscores_` to capture all the function names.
+3. Search for `Text Domain: timberscores` in style.css.
+4. Search for <code>&nbsp;timberscores</code> (with a space before it) to capture DocBlocks.
+5. Search for `timberscores-` to capture prefixed handles.
 
-OR
-
-* Search for: `'_s'` and replace with: `'megatherium'`
-* Search for: `_s_` and replace with: `megatherium_`
-* Search for: `Text Domain: _s` and replace with: `Text Domain: megatherium` in style.css.
-* Search for: <code>&nbsp;_s</code> and replace with: <code>&nbsp;Megatherium</code>
-* Search for: `_s-` and replace with: `megatherium-`
-
-Then, update the stylesheet header in style.css and the links in footer.php with your own information. Next, update or delete this readme.
+Then, update the stylesheet header in style.css and the links in views/footer.twig with your own information. Then, update or delete this readme.
 
 Now you're ready to go! The next step is easy to say, but harder to do: make an awesome WordPress theme. :)
 
