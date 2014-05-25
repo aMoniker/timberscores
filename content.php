@@ -10,6 +10,6 @@ if (!$timber_template_part_context) { // TODO: This is ugly.. need a better way
 
 $context = array_merge(timberscores_get_context(), $timber_template_part_context);
 
-timberscores_render_page('views/content.twig', $context);
+Timber::render('views/content.twig', $context);
 
 ?>
