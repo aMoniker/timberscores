@@ -11,7 +11,7 @@
             {{ timber_get_template_part('content', post.format, { 'post': post }) }}
         {% endfor %}
     {% else %}
-        {{ function('get_template_part', 'content', 'none') }}
+        {{ timber_get_template_part('content', 'none') }}
     {% endif %}
 
     {{ function('timberscores_paging_nav') }}
