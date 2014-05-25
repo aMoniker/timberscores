@@ -1,0 +1,16 @@
+<article id="post-{{ post.ID }}" class="{{ post.post_class }}">
+    <header class="entry-header">
+        <h1 class="entry-title">{{ post.title }}</h1>
+    </header><!-- .entry-header -->
+
+    <div class="entry-content">
+        {{ post.content }}
+        {{ function('wp_link_pages', {
+            'before': '<div class="page-links">' . __('Pages:', 'timberscores'),
+            'after': '</div>'
+        }) }}
+    </div><!-- .entry-content -->
+    <footer class="entry-footer">
+        {{ function('edit_post_link', __('Edit', 'timberscores'), '<span class="edit-link">', '</span>', post.ID) }}
+    </footer><!-- .entry-footer -->
+</article><!-- #post-## -->
