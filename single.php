@@ -5,28 +5,11 @@
  * @package timberscores
  */
 
-get_header(); ?>
+$context = timberscores_get_context();
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+$context['posts'] = Timber::get_posts();
+$context['sidebar'] = Timber::get_sidebar();
 
-		<?php while ( have_posts() ) : the_post(); ?>
+timberscores_render_page('views/single.twig', $context);
 
-			<?php get_template_part( 'content', 'single' ); ?>
-
-			<?php timberscores_post_nav(); ?>
-
-			<?php
-				// If comments are open or we have at least one comment, load up the comment template
-				if ( comments_open() || '0' != get_comments_number() ) :
-					comments_template();
-				endif;
-			?>
-
-		<?php endwhile; // end of the loop. ?>
-
-		</main><!-- #main -->
-	</div><!-- #primary -->
-
-<?php get_sidebar(); ?>
-<?php get_footer(); ?>
+?>
