@@ -1,14 +1,17 @@
 <?php
 
 function timberscores_get_context() {
-    // TODO: This should use the wp object cache
+    $cache = wp_cache_get('context', 'timberscores');
+    if ($cache) { return $cache; }
+
     $context = Timber::get_context();
 
     // set your own $context variables here when you want them to
-    // be available in all templates
+    // be available in all twig templates
 
     TimberHelper::function_wrapper('timber_get_template_part');
 
+    wp_cache_set('context', $context, 'timberscores');
     return $context;
 }
 
