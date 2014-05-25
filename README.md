@@ -15,8 +15,12 @@ My ultra-minimal CSS might make me look like theme tartare but that means less s
 * Smartly organized starter CSS in `style.css` that will help you to quickly get your design off the ground.
 * Licensed under GPLv2 or later. :) Use it to make something cool.
 
+
 Getting Started
----------------
+===
+
+First, make sure that your copy of Wordpress has [Timber](http://jarednova.github.io/timber/) installed. **timberscores does not include a copy of timber**. This is so you can decide whether to use Timber as a plugin, or as a theme include.
+
 
 There's no generator currently like there is at [http://underscores.me](http://underscores.me), but you could customize the name of the theme fairly easily with a global find/replace of the word `timberscores`.
 
