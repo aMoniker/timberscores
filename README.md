@@ -24,6 +24,12 @@ First, make sure that your copy of Wordpress has [Timber](http://jarednova.githu
 
 There's no generator currently like there is at [http://underscores.me](http://underscores.me), but you could customize the name of the theme fairly easily with a global find/replace of the word `timberscores`.
 
+Since `timberscores` is a unique enough string (unlike `_s`) it's possible to use a single command to replace all instance of `timberscores` with your own name:
+
+`grep -rl --exclude-dir .git 'timberscores' . | xargs sed -i 's/timberscores/your_name_here/ig'`
+
+If you're on OSX, you may want to install `brew install gnu-sed` and use `gsed` instead of `sed` as the builtin OSX version of sed is sort of bad.
+
 Or, you can snoop around manually.
 
 1. Search for `'timberscores'` (inside single quotations) to capture the text domain.
